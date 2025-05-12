@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mashori — Official Page</title>
+    <style>
+        body {
+        position: relative;  
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #000000, #180827);
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 2;
+        animation: fadeIn 1.5s ease-in;
+      }
+  
+
+  .background-slideshow {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+  }
+
+  .background-slideshow::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(20px);
+    background: rgba(0, 0, 0, 0.65); /* ← просто тёмный полупрозрачный слой */
+    z-index: 2;
+  }
+
+  .background-slideshow img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    z-index: 1;
+  }
+
+  .background-slideshow img.active {
+    opacity: 1;
+  }
+  
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+  
+      header {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding: 2rem 1rem;
+        border-radius: 16px;
+
+        max-width: 800px;
+        width: 100%;
+        backdrop-filter: blur(8px);
+        animation: glowHeader 3s ease-in-out infinite alternate;
+      }
+  
+  
+      header h1 {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+        color: #fff;
+        letter-spacing: 1px;
+        text-shadow: 0 0 10px rgba(255, 0, 128, 0.3);
+        animation: fadeIn 2s ease-in;
+      }
+  
+      header p {
+        font-size: 1.1rem;
+        max-width: 600px;
+        margin: 0 auto;
+        color: #ccc;
+        line-height: 1.6;
+        animation: fadeIn 2.5s ease-in;
+      }
+  
+      .avatar {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        background: url('logo.png') no-repeat center/cover;
+        margin: 1rem auto 2rem;
+        border: 3px solid #ff007f;
+        box-shadow: 0 0 20px rgba(255, 0, 128, 0.6);
+        animation: pulseAvatar 2s ease-in-out infinite alternate;
+      }
+  
+      @keyframes pulseAvatar {
+        from { transform: scale(1); box-shadow: 0 0 10px rgba(255, 0, 128, 0.4); }
+        to { transform: scale(1.05); box-shadow: 0 0 25px rgba(255, 0, 128, 0.7); }
+      }
+  
+      .lang-switcher {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+      }
+  
+      .lang-switcher button {
+        background: #ff007f;
+        color: #fff;
+        border: none;
+        padding: 0.5rem 1rem;
+        margin-left: 0.5rem;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+  
+      .buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        max-width: 400px;
+      }
+  
+      .buttons a {
+        text-decoration: none;
+        background: #ff007f;
+        padding: 1rem;
+        border-radius: 8px;
+        text-align: center;
+        color: #fff;
+        font-weight: 500;
+        transition: background 0.3s;
+      }
+  
+      .buttons a:hover {
+        background: rgb(230, 0, 111);
+      }
+  
+      .offers, .videos {
+        margin-top: 4rem;
+        max-width: 1000px;
+        text-align: left;
+      }
+  
+      .offers h2, .videos h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+      }
+  
+      .offer {
+        background: rgba(230, 0, 111, 0.315);
+        padding: 1.25rem;
+        columns: 2;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+      }
+  
+      .offer h3 {
+        margin: 0 0 0.5rem;
+        font-size: 1.2rem;
+      }
+  
+      .offer p {
+        margin: 0;
+        color: #ffffff;
+      }
+  
+      .video-wrapper {
+        display: flex;
+        gap: 1rem;
+        overflow-x: scroll;
+        padding-bottom: 1rem;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+      }
+  
+      .video-wrapper blockquote {
+        flex: 0 0 325px;
+        border-radius: 12px;
+        scroll-snap-align: start;
+        background: #000;
+      }
+  
+      footer {
+        margin-top: 4rem;
+        font-size: 0.9rem;
+        color: #ffffff;
+      }
+  
+      @media (max-width: 768px) {
+        header h1 {
+          font-size: 2rem;
+        }
+        .video-wrapper blockquote {
+          flex: 0 0 90vw;
+        }
+      }
+
+.hero {
+  width: 100%;
+  height: 400px;
+  background: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: none;
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0 1rem;
+}
+
+.hero-content h1 {
+  font-size: 6rem;
+  color: #fff;
+  margin: 0;
+  text-shadow: 0 0 10px rgba(0,0,0,0.7);
+}
+
+.hero-content p {
+  margin-top: 1rem;
+  font-size: 1.7rem;
+  color: #ddd;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
+}
+
+.language-modal {
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.language-modal-content {
+  background: #1a0033;
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255, 0, 128, 0.4);
+}
+
+.language-buttons button {
+  background: #ff007f;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  margin: 0.5rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.language-buttons button:hover {
+  background: #e6006f;
+}
+
+
+
+
+@media (max-width: 768px) {
+  body {
+    padding: 1rem 0.5rem;
+  }
+
+  header {
+    padding: 1.5rem 1rem;
+    max-width: 95%;
+  }
+
+  header h1 {
+    font-size: 2rem;
+  }
+
+  header p {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .buttons {
+    max-width: 90%;
+  }
+
+  .buttons a {
+    font-size: 0.95rem;
+    padding: 0.9rem;
+  }
+
+  .offer {
+    columns: 1;
+    padding: 1rem;
+  }
+
+  .offer h3 {
+    font-size: 1.1rem;
+  }
+
+  .offer p {
+    font-size: 0.95rem;
+  }
+
+  .hero {
+    height: 280px;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-content p {
+    font-size: 1.1rem;
+    padding: 0 1rem;
+  }
+
+  .video-wrapper blockquote {
+    flex: 0 0 90vw;
+  }
+
+  .lang-switcher {
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .lang-switcher button {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.8rem;
+  }
+
+  footer {
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 1rem 0.5rem;
+    font-size: 14px;
+  }
+
+  header {
+    padding: 1.2rem 0.8rem;
+    max-width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  header h1 {
+    font-size: 2.2rem;
+  }
+
+  header p {
+    font-size: 1rem;
+    padding: 0 0.5rem;
+  }
+
+  .avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .buttons {
+    max-width: 100%;
+    gap: 0.8rem;
+  }
+
+  .buttons a {
+    font-size: 1rem;
+    padding: 0.9rem 1rem;
+    word-break: break-word;
+  }
+
+  .offer {
+    columns: 1;
+    padding: 1rem;
+  }
+
+  .offer h3 {
+    font-size: 1.1rem;
+  }
+
+  .offer p {
+    font-size: 0.95rem;
+  }
+
+  .offers h2,
+  .videos h2 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .hero {
+    height: 260px;
+  }
+
+  .hero-content h1 {
+    font-size: 2.8rem;
+  }
+
+  .hero-content p {
+    font-size: 1.2rem;
+    padding: 0 1rem;
+  }
+
+  .video-wrapper {
+    padding: 0 0.5rem 1rem;
+  }
+
+  .video-wrapper blockquote {
+    flex: 0 0 90vw;
+  }
+
+  .lang-switcher {
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .lang-switcher button {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.85rem;
+  }
+
+  .language-modal-content {
+    width: 90%;
+    padding: 1.5rem;
+  }
+
+  .language-buttons button {
+    width: 100%;
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+
+  footer {
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 1rem;
+  }
+}
+
+
+    </style>
+  </head>
+  
+  <body>
+      <div class="background-slideshow">
+    <img src="1.png" class="active" />
+    <img src="2.png" />
+    <img src="3.png" />
+    <img src="4.png" />
+    <img src="5.png" />
+  </div>
+
+    <script async src="https://www.tiktok.com/embed.js"></script>
+  
+    <div class="lang-switcher">
+      <button onclick="setLang('en')">EN</button>
+      <button onclick="setLang('ru')">RU</button>
+    </div>
+  
+<!-- 
+      <img src="1.png" alt="Mashori banner" /> -->
+<header class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 data-i18n="title">Mashori</h1>
+    <p data-i18n="bio">
+      Creative mind, soft voice, sharp vision. Late-night vibes & curated energy. Welcome to my universe.
+    </p>
+  </div>
+</header>
+
+    <div class="buttons">
+      <a href="https://boosty.to/moonsizeread/donate" data-i18n="boosty">💖 Subscribe on Boosty</a>
+      <a href="https://www.tiktok.com/@mariuwulikkk?lang=ru-RU" data-i18n="tiktok">📷 Follow on TikTok</a>
+      <a href="https://t.me/+JO3d-3tEwiQ1MmQy" data-i18n="telegram">🗨️ Join my Telegram</a>
+      <a href="https://t.me/s1mka333" data-i18n="manager">📬 Contact My Manager</a>
+    </div>
+    
+    <div class="videos">
+      <h2 data-i18n="featuredVideos">🎥 Featured Videos</h2>
+      <div class="video-wrapper">
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@mariuwulikkk/video/7498827519324425527" 
+          data-video-id="7498827519324425527" style="max-width: 325px;min-width: 220px;">
+          <section></section>
+        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@mariuwulikkk/video/7494728879790214405" 
+          data-video-id="7494728879790214405" style="max-width: 325px;min-width: 220px;">
+          <section></section>
+        </blockquote>
+        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@mariuwulikkk/video/7501765472698830087" 
+          data-video-id="7501765472698830087" style="max-width: 325px;min-width: 220px;">
+          <section></section>
+        </blockquote>
+      </div>
+    </div>
+  
+    <footer>
+      &copy; 2025 <span data-i18n="title">Mashori</span>. <span data-i18n="rights">All rights reserved.</span>
+    </footer>
+  
+    <script>
+
+      const slides = document.querySelectorAll('.background-slideshow img');
+      let index = 0;
+
+      setInterval(() => {
+        slides[index].classList.remove('active');
+        index = (index + 1) % slides.length;
+        slides[index].classList.add('active');
+      }, 5000); // смена каждые 6 сек
+
+      const translations = {
+en: {
+  title: "Mashori",
+  bio: "Creative mind, soft voice, sharp vision. Late-night vibes & curated energy. Welcome to my universe. Tiktok, Twitch, Telegram.",
+  boosty: "💖 Subscribe on Boosty",
+  tiktok: "📷 Follow on TikTok",
+  telegram: "🗨️ Join my Telegram",
+  manager: "📬 Contact My Manager",
+  offerTitle: "✨ What You’ll Find",
+  offer1Title: "Behind the Scenes",
+  offer1Text: "Unfiltered, authentic moments you won’t find anywhere else.",
+  offer2Title: "Exclusive Access",
+  offer2Text: "Photos, thoughts, and drops just for my inner circle.",
+  offer3Title: "Creative Chaos",
+  offer3Text: "Streams, thoughts, ideas — a living notebook of a digital soul.",
+  offer4Title: "Personal Vibes",
+  offer4Text: "Moments of laughter, thoughts at 3 AM, and music that heals — all shared with you.",
+  offer5Title: "Early Drops",
+  offer5Text: "Get early access to my content, merch, and secret experiments before anyone else.",
+  offer6Title: "Mystery & Mood",
+  offer6Text: "A blend of moodboards, mysteries, and magical moments that define Mashori.",
+  featuredVideos: "🎥 Featured Videos",
+  rights: "All rights reserved."
+},
+ru: {
+  title: "Машори",
+  bio: "Творческий ум, мягкий голос, острое видение. Ночные вайбы и отборная энергия. Добро пожаловать в мой мир. Tiktok, Twitch, Telegram.",
+  boosty: "💖 Подписка на Boosty",
+  tiktok: "📷 TikTok Mashori",
+  telegram: "🗨️ Войти в Telegram",
+  manager: "📬 Связаться с менеджером",
+  offerTitle: "✨ Что ты найдёшь внутри",
+  offer1Title: "За кадром",
+  offer1Text: "Нефильтрованные, настоящие моменты, которых нет нигде больше.",
+  offer2Title: "Эксклюзивный доступ",
+  offer2Text: "Фото, мысли и дропы только для близких.",
+  offer3Title: "Творческий хаос",
+  offer3Text: "Стримы, мысли, идеи — живой дневник цифровой души.",
+  offer4Title: "Личное настроение",
+  offer4Text: "Смех, мысли в 3 часа ночи и музыка, что лечит — делюсь этим с тобой.",
+  offer5Title: "Ранние дропы",
+  offer5Text: "Получай доступ к контенту, мерчу и экспериментам раньше всех.",
+  offer6Title: "Мистика и атмосфера",
+  offer6Text: "Мудборды, загадки и волшебные моменты, из которых состоит Mashori.",
+  featuredVideos: "🎥 Избранные видео",
+  rights: "Все права защищены."
+}
+
+      };
+  
+  document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("languageModal");
+    const savedLang = localStorage.getItem("preferredLang");
+
+    if (savedLang) {
+      setLang(savedLang);
+      modal.style.display = "none";
+      document.body.style.overflow = "auto";
+    } else {
+      modal.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    }
+  });
+
+  function selectLanguage(lang) {
+    setLang(lang);
+    localStorage.setItem("preferredLang", lang);
+    const modal = document.getElementById("languageModal");
+    modal.style.display = "none";
+    document.body.style.overflow = "auto";
+  }
+
+  function setLang(lang) {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (translations[lang][key]) {
+      el.textContent = translations[lang][key];
+    }
+  });
+}
+
+    </script>
+
+    
+<div id="languageModal" class="language-modal">
+  <div class="language-modal-content">
+    <h2>Choose your language / Выберите язык</h2>
+    <div class="language-buttons">
+      <button onclick="selectLanguage('en')">English</button>
+      <button onclick="selectLanguage('ru')">Русский</button>
+    </div>
+  </div>
+</div>
+  </body>
+
+  
+</html>
